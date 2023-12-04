@@ -11,6 +11,7 @@ from invenio_administration.views.base import (
     AdminResourceDetailView,
     AdminResourceEditView,
     AdminResourceListView,
+    AdminResourceCreateView
 )
 from invenio_i18n import lazy_gettext as _
 
@@ -22,16 +23,19 @@ class PageListView(AdminResourceListView):
     name = "Pages"
     resource_config = "pages_resource"
     search_request_headers = {"Accept": "application/json"}
-    title = "Pages"
-    category = "Pages"
+    title = "Translate and Publish"
+    category = "Translate and Publish"
+    menu_label = "Translate and Publish"
     pid_path = "id"
     icon = "file alternate outline"
+
 
     display_search = True
     display_delete = False
     display_create = False
     display_edit = True
-
+    display_translate = True
+    
     item_field_list = {
         "url": {"text": _("Url"), "order": 1, "width": 2},
         "title": {"text": _("Title"), "order": 2, "width": 3},
@@ -39,7 +43,7 @@ class PageListView(AdminResourceListView):
         "created": {"text": _("Created"), "order": 4, "width": 3},
         "updated": {"text": _("Updated"), "order": 5, "width": 3},
     }
-
+    create_view_name = "pages_create"
     search_config_name = "PAGES_SEARCH"
     search_facets_config_name = "PAGES_FACETS"
     search_sort_config_name = "PAGES_SORT_OPTIONS"
@@ -107,3 +111,18 @@ class PageDetailView(AdminResourceDetailView):
         "description": {"text": _("Description"), "order": 5},
         "content": {"text": _("Content"), "order": 6, "escape": True},
     }
+
+class PageCreateView(AdminResourceCreateView):
+    """Configuration for Banner create view."""
+
+    name = "pages_create"
+    url = "/pages/create"
+    resource_config = "pages_resource"
+    pid_path = "id"
+    api_endpoint = "/pages"
+    title = "Translate and Publish"
+
+    list_view_name = "Pages"
+
+
+    form_fields = {}
