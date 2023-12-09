@@ -42,7 +42,7 @@ class PageSchema(Schema):
     id = fields.String()
     url = fields.String(metadata={"create_only": True})
     title = fields.String()
-    content = DynamicSanitizedHTML()
+    content = fields.String()
     description = fields.String()
     template_name = fields.String()
     created = TZDateTime(timezone=timezone.utc, format="iso", dump_only=True)
